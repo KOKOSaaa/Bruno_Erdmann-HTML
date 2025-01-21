@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+</head>
+<body>
+<section id="gallery" style="max-width: 100vw; overflow-x: hidden; text-align: center;">
+    <h2>Galeria</h2>
+    <div class="enlarged-container" style="display: flex; flex-direction: column; align-items: center;">
+        <button id="prev" style="background-color: #000080; color: #ffebcd; border: none; padding: 10px; cursor: pointer; transition: background-color 0.3s;">Poprzednie</button>
+        <img id="enlargedImage" src="media/ogorki.jpg" alt="Enlarged Image" style="width: 356px; height: 356px; object-fit: cover;">
+        <button id="next" style="background-color: #000080; color: #ffebcd; border: none; padding: 10px; cursor: pointer; transition: background-color 0.3s;">Następne</button>
+    </div>
+    <div class="gallery-container" style="margin-top: 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+        <img src="media/ogorki.jpg" alt="Pikle 1" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/kimchi.jpg" alt="Pikle 2" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/kapusta.jpg" alt="Pikle 3" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/buraki.jpg" alt="Pikle 4" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/papryka.jpg" alt="Pikle 5" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/cebula.jpg" alt="Pikle 6" style="width: 89px; height: 89px; object-fit: cover;">
+        <img src="media/grzyby.jpg" alt="Pikle 7" style="width: 89px; height: 89px; object-fit: cover;">
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.gallery-container img');
+        const enlargedImage = document.getElementById('enlargedImage');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            enlargedImage.src = images[index].src;
+            currentIndex = index;
+        }
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                showImage(index);
+            });
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            showImage(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            showImage(currentIndex);
+        });
+
+        showImage(currentIndex);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #b80c0c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu {
+    display: none;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.menu li {
+    margin: 0 20px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+}
+
+.menu a:hover {
+    color: #ff6347;
+}
+
+.menu-button {
+    display: none;
+    background-color: #ffebcd;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+    z-index: 1001;
+}
+
+.menu-button:hover {
+    background-color: #e0d7c6;
+}
+
+.logo {
+    width: 150px;
+    animation: logoAnimation 2s infinite;
+}
+
+@keyframes logoAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+main {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+section {
+    margin-bottom: 20px;
+    background: #7f7562;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form button {
+    margin-top: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #000;
+}
+
+ul, ol {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+
+    .enlarged-container img {
+        width: 80%;
+        height: auto;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    header {
+        padding: 5px 0;
+        width: 100%;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    main {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .enlarged-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    .enlarged-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-button {
+        display: block;
+        margin: 10px auto;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .menu.show {
+        max-height: 300px;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+    .menu-button {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    }
+
+    .menu {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200px;
+        background-color: #333;
+        z-index: 1000;
+    }
+
+    .menu.show {
+        display: flex;
+    }
+
+    .menu li {
+        margin: 0;
+    }
+
+    .menu a {
+        display: block;
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .menu-button {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    }
+
+    .menu {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 200px;
+        background-color: #333;
+        z-index: 1000;
+    }
+
+    .menu.show {
+        display: flex;
+    }
+
+    .menu li {
+        margin: 0;
+    }
+
+    .menu a {
+        display: block;
+        padding: 15px;
+    }
+}
+
+@media (min-width: 600px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .iframe-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .iframe-container iframe {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+    }
+    iframe {
+        width: 77%;
+    }
+    .return-link {
+        display: none;
+    }
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.gallery-container img {
+    width: 133px;
+    height: 133px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.enlarged-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.enlarged-container img {
+    width: 534px;
+    height: auto;
+    object-fit: cover;
+}
+
+.enlarged-container button {
+    background-color: #000080;
+    color: #ffebcd;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.enlarged-container button:hover {
+    background-color: #dda0dd;
+}

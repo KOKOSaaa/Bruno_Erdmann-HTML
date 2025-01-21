@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno Erdmann - 7 Cudownych Rodzajów Pikli!!!</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        iframe {
+            display: block;
+            margin: 0 auto;
+            overflow-y: auto;
+        }
+        .return-link {
+            background: #7f7562;
+            color: #ffebcd;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .return-link:hover {
+            background-color: #000080;
+        }
+        @media (min-width: 600px) {
+            .iframe-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .iframe-container iframe {
+                width: 100%;
+            }
+            .iframe-container .return-link {
+                display: inline-block;
+                margin-bottom: 0;
+            }
+            #galeria {
+                height: 60vh;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, auto);
+                gap: 20px;
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+        @media (min-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, auto);
+            }
+            iframe {
+                width: 77%;
+            }
+            .return-link {
+                display: none;
+            }
+        }
+        @media (min-height: 1000px) {
+            #galeria {
+                height: 60vh;
+            }
+        }
+        .logo {
+            width: 200px;
+            margin: 0 auto 20px auto;
+            animation: logoAnimation 2s infinite;
+        }
+        @keyframes logoAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @media (min-width: 600px) and (max-width: 1200px) {
+            .menu {
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 200px;
+                background-color: #333;
+                z-index: 1000;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu li {
+                margin: 0;
+            }
+
+            .menu a {
+                display: block;
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .menu {
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100%;
+                width: 200px;
+                background-color: #333;
+                z-index: 1000;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu li {
+                margin: 0;
+            }
+
+            .menu a {
+                display: block;
+                padding: 15px;
+            }
+        }
+        .menu-button {
+            display: none;
+            background-color: #ffebcd;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+            z-index: 1001;
+        }
+
+        .menu-button:hover {
+            background-color: #e0d7c6;
+        }
+
+        @media (min-width: 600px) and (max-width: 1200px) {
+            .menu-button {
+                display: block;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .menu-button {
+                display: block;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+            }
+        }
+        @media (max-width: 599px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #333;
+                z-index: 1000;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+
+            .menu li {
+                margin: 0;
+            }
+
+            .menu a {
+                display: block;
+                padding: 10px;
+            }
+
+            .menu-button {
+                display: block;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.menu-button');
+            const menu = document.querySelector('.menu');
+            const menuLinks = document.querySelectorAll('.menu a');
+
+            menuButton.addEventListener('click', function() {
+                menu.classList.toggle('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('show');
+                });
+            });
+
+            const images = document.querySelectorAll('.gallery-container img');
+            const enlargedImage = document.getElementById('enlargedImage');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            let currentIndex = 0;
+
+            function showImage(index) {
+                enlargedImage.src = images[index].src;
+                currentIndex = index;
+            }
+
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    showImage(index);
+                });
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+                showImage(currentIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+                showImage(currentIndex);
+            });
+
+            showImage(currentIndex);
+
+            const returnLinks = document.querySelectorAll('.return-link');
+            returnLinks.forEach(link => {
+                link.style.display = 'none';
+            });
+        });
+    </script>
+</head>
+<body style="background-color: #ffebcd; color: #000080; width: 100%; overflow-x: hidden;">
+    <header style="width: 100%; box-sizing: border-box;">
+        <h2 class="logo">7 Cudownych Rodzajów Pikli!!!</h2>
+        <button class="menu-button">Menu</button>
+        <nav>
+            <ul class="menu">
+                <li><a href="#lista">Lista pikli</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#opis">Opis pikli</a></li>
+                <li><a href="#porownanie">Porównanie pikli</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="#ankieta">Ankieta</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main style="padding: 20px; display: flex; flex-direction: column; align-items: center; overflow: auto;">
+        <div class="grid-container">
+            <div class="iframe-container">
+                <iframe id="lista" src="Lista pikli.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+            <div class="iframe-container">
+                <iframe id="galeria" src="Galeria.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+            <div class="iframe-container">
+                <iframe id="opis" src="Opis pikli.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+            <div class="iframe-container">
+                <iframe id="porownanie" src="Porównanie pikli.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+            <div class="iframe-container">
+                <iframe id="media" src="media.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+            <div class="iframe-container">
+                <iframe id="ankieta" src="Ankieta.html" style="width: 97%; height: 110vh; border: 2px solid #7f7562; background-color: #7f7562; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-bottom: 20px; overflow-x: hidden;"></iframe>
+                <a href="#top" class="return-link">Powrót na górę</a>
+            </div>
+        </div>
+    </main>
+    <footer style="width: 100%; box-sizing: border-box;">
+        <p>Bruno Erdmann 2ta</p>
+    </footer>
+</body>
+</html>
